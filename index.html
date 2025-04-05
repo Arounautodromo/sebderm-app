@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sebderm App</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/analysis.css">
+    <script src="./lib/chart.min.js"></script>
+    <script src="./lib/simple-statistics.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav-menu">
+            <a href="index.html" class="active">Home</a>
+            <a href="analysis.html">Analisi</a>
+        </nav>
+
+        <h1>Sebderm App</h1>
+        
+        <form id="sebdermForm">
+            <!-- DATI GENERALI -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('generali')">
+                    <h2>Dati Generali</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content" id="generali">
+                    <div class="form-group">
+                        <label>Data:</label>
+                        <input type="date" id="data" name="data">
+                    </div>
+                    <div class="form-group">
+                        <label>Peso (kg):</label>
+                        <input type="number" id="peso" name="peso" step="0.1">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SONNO -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('sonno')">
+                    <h2>Sonno</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content" id="sonno">
+                    <div class="form-group">
+                        <label>Ore di sonno:</label>
+                        <input type="number" id="oreSonno" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Qualità del sonno (1-5):</label>
+                        <input type="range" id="qualitaSonno" min="1" max="5">
+                        <span id="qualitaSonnoValue">3</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Ora di andare a letto:</label>
+                        <input type="time" id="oraDormire">
+                    </div>
+                    <div class="form-group">
+                        <label>Ora di sveglia:</label>
+                        <input type="time" id="oraSveglia">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ALIMENTAZIONE -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('alimentazione')">
+                    <h2>Alimentazione</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content" id="alimentazione">
+                    <div class="form-group">
+                        <label>Colazione:</label>
+                        <textarea id="colazione"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Pranzo:</label>
+                        <textarea id="pranzo"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Cena:</label>
+                        <textarea id="cena"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Snack:</label>
+                        <textarea id="snack"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Acqua (litri):</label>
+                        <input type="number" id="acqua" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label>Alcool:</label>
+                        <select id="alcool">
+                            <option value="no">No</option>
+                            <option value="poco">Poco (1-2 bicchieri)</option>
+                            <option value="molto">Molto (più di 2 bicchieri)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Caffeina (numero bevande):</label>
+                        <input type="number" id="caffeina" min="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTEGRATORI E MEDICINALI -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('integratori')">
+                    <h2>Integratori e Medicinali</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content" id="integratori">
+                    <div class="form-group">
+                        <label>Integratori assunti:</label>
+                        <textarea id="integratoriAssunti"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Medicinali:</label>
+                        <textarea id="medicinali"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Probiotici:</label>
+                        <textarea id="probiotici"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STRESS E ATTIVITÀ -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('stress')">
+                    <h2>Stress e Attività</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content" id="stress">
+                    <div class="form-group">
+                        <label>Livello di stress (1-10):</label>
+                        <input type="range" id="livelloStress" min="1" max="10">
+                        <span id="stressValue">5</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Ore di lavoro/studio:</label>
+                        <input type="number" id="oreLavoro" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Attività fisica:</label>
+                        <textarea id="attivitaFisica" placeholder="Tipo e durata"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Ore all'aria aperta:</label>
+                        <input type="number" id="oreAria" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Esposizione al sole:</label>
+                        <select id="sole">
+                            <option value="no">No</option>
+                            <option value="poco">Poca</option>
+                            <option value="molto">Molta</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SKINCARE -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('skincare')">
+                    <h2>Skincare</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content" id="skincare">
+                    <div class="form-group">
+                        <label>Prodotti mattina:</label>
+                        <textarea id="prodottiMattina"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Prodotti sera:</label>
+                        <textarea id="prodottiSera"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Shampoo/prodotti capelli:</label>
+                        <textarea id="prodottiCapelli"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Lavaggio capelli:</label>
+                        <select id="lavaggioCapelli">
+                            <option value="no">No</option>
+                            <option value="si">Sì</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AMBIENTE -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('ambiente')">
+                    <h2>Ambiente</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content" id="ambiente">
+                    <div class="form-group">
+                        <label>Temperatura:</label>
+                        <input type="number" id="temperatura" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label>Cambio federe/asciugamani:</label>
+                        <select id="cambioTessuti">
+                            <option value="no">No</option>
+                            <option value="si">Sì</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sezione Condizione Pelle -->
+            <div class="skin-condition-container">
+                <h2 class="skin-condition-title">Valutazione Condizioni della Pelle</h2>
+                <div class="skin-condition-section">
+                    <div class="section-header special" onclick="toggleSection('pelle')">
+                        <h2>Condizione della Pelle</h2>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="section-content" id="pelle">
+                        <div class="form-group">
+                            <label>Viso - Zona T (0-100):</label>
+                            <input type="range" id="pelleZonaT" min="0" max="100">
+                            <span id="zonaTValue">50</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Viso - Guance (0-100):</label>
+                            <input type="range" id="pelleGuance" min="0" max="100">
+                            <span id="guanceValue">50</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Viso - Contorno occhi (0-100):</label>
+                            <input type="range" id="pelleOcchi" min="0" max="100">
+                            <span id="occhiValue">50</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Collo (0-100):</label>
+                            <input type="range" id="pelleCollo" min="0" max="100">
+                            <span id="colloValue">50</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Cuoio capelluto (0-100):</label>
+                            <input type="range" id="pelleCuoio" min="0" max="100">
+                            <span id="cuoioValue">50</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Prurito (1-10):</label>
+                            <input type="range" id="prurito" min="1" max="10">
+                            <span id="pruritoValue">5</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Desquamazione (1-10):</label>
+                            <input type="range" id="desquamazione" min="1" max="10">
+                            <span id="desquamazioneValue">5</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Rossore (1-10):</label>
+                            <input type="range" id="rossore" min="1" max="10">
+                            <span id="rossoreValue">5</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Note del giorno:</label>
+                            <textarea id="note"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit">Salva</button>
+        </form>
+
+        <div class="history-container">
+            <h2>Storico</h2>
+            <div id="entriesList"></div>
+        </div>
+    </div>
+    <script src="./js/script.js"></script>
+</body>
+</html>

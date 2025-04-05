@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sebderm App - Analisi</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/analysis.css">
+    <script src="lib/chart.min.js"></script>
+    <script src="lib/simple-statistics.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="analysis.html" class="active">Analisi</a>
+        </nav>
+
+        <h1>Analisi Dati</h1>
+
+        <div class="analysis-controls">
+            <div class="time-filter">
+                <label>Periodo di analisi:</label>
+                <select id="timeRange">
+                    <option value="7">Ultima settimana</option>
+                    <option value="30">Ultimo mese</option>
+                    <option value="90">Ultimi 3 mesi</option>
+                    <option value="all">Tutti i dati</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Riepilogo generale -->
+            <div class="dashboard-card">
+                <h2>Riepilogo</h2>
+                <div id="summary"></div>
+            </div>
+
+            <!-- Grafici principali -->
+            <div class="dashboard-card">
+                <h2>Andamento Condizioni Pelle</h2>
+                <canvas id="skinTrendChart"></canvas>
+            </div>
+
+            <div class="dashboard-card">
+                <h2>Correlazioni Principali</h2>
+                <canvas id="correlationChart"></canvas>
+            </div>
+
+            <div class="dashboard-card">
+                <h2>Impact Heat Map</h2>
+                <canvas id="heatmapChart"></canvas>
+            </div>
+        </div>
+
+        <div class="analysis-section">
+            <h2>Pattern Identificati</h2>
+            <div id="patterns" class="analysis-card"></div>
+        </div>
+
+        <div class="analysis-section">
+            <h2>Suggerimenti</h2>
+            <div id="suggestions" class="analysis-card"></div>
+        </div>
+
+        <div class="analysis-section">
+            <h2>Efficacia Prodotti</h2>
+            <div id="productsEffectiveness" class="analysis-card"></div>
+        </div>
+    </div>
+
+    <script src="js/analysis.js"></script>
+    <script src="js/charts.js"></script>
+</body>
+</html>

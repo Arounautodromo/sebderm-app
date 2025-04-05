@@ -1,0 +1,225 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #E8F3F1;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #4A4A4A;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.nav-menu {
+    margin-bottom: 30px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #4A4A4A;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.nav-menu a.active {
+    background-color: #D5E3E8;
+}
+
+.section {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.section-header {
+    background-color: #F5E6E8;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px 5px 0 0;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #4A4A4A;
+}
+
+.section-content {
+    padding: 15px;
+    display: none;
+}
+
+.section-content.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #4A4A4A;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+button {
+    background-color: #D5E3E8;
+    color: #4A4A4A;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #c5d3d8;
+}
+
+.history-container {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.entry-card {
+    background-color: #F5E6E8;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.edit-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #666;
+}
+
+.edit-icon:hover {
+    color: #333;
+}
+
+.toggle-icon {
+    transition: transform 0.3s ease;
+}
+
+.section-header.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* Nuovi stili per la sezione Condizione della Pelle */
+.skin-condition-container {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #F5E6E8;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.skin-condition-title {
+    text-align: center;
+    color: #4A4A4A;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #D5E3E8;
+}
+
+.skin-condition-section {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.skin-condition-section .section-header.special {
+    background-color: #E8D5D8;
+    border-bottom: 2px solid #D5E3E8;
+}
+
+.skin-condition-section .form-group {
+    padding: 15px;
+    border-bottom: 1px solid #F5E6E8;
+}
+
+.skin-condition-section input[type="range"] {
+    background-color: #F5E6E8;
+}
+
+.skin-condition-section span {
+    color: #4A4A4A;
+    font-weight: bold;
+}
+
+.skin-condition-section input[type="range"]::-webkit-slider-thumb {
+    background: #E8D5D8;
+}
+
+.skin-condition-section input[type="range"]::-moz-range-thumb {
+    background: #E8D5D8;
+}
+
+.skin-condition-title::before {
+    content: "📊";
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .section-header h2 {
+        font-size: 1.1em;
+    }
+
+    .skin-condition-container {
+        margin-top: 30px;
+        padding: 15px;
+    }
+}

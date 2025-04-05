@@ -1,0 +1,93 @@
+.nav-menu {
+    margin-bottom: 30px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #4A4A4A;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.nav-menu a.active {
+    background-color: #D5E3E8;
+}
+
+.analysis-controls {
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: #F5E6E8;
+    border-radius: 4px;
+}
+
+.time-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.dashboard-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.analysis-section {
+    margin-bottom: 30px;
+}
+
+.analysis-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.correlation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.correlation-value {
+    font-weight: bold;
+}
+
+.correlation-high {
+    color: #e74c3c;
+}
+
+.correlation-medium {
+    color: #f39c12;
+}
+
+.correlation-low {
+    color: #3498db;
+}
+
+.suggestion-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-left: 4px solid #D5E3E8;
+    border-radius: 0 4px 4px 0;
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
