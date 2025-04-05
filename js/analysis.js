@@ -267,4 +267,113 @@ class SebdermAnalysis {
 // Inizializza l'analisi quando la pagina è caricata
 document.addEventListener('DOMContentLoaded', () => {
     new SebdermAnalysis();
+
+    // Aggiungi questa nuova classe per l'analisi testuale
+class TextAnalysis {
+    constructor() {
+        this.keywords = new Map();
+        this.commonWords = new Set(['il', 'lo', 'la', 'i', 'gli', 'le', 'un', 'uno', 'una', 'e', 'è', 'di', 'a', 'da', 'in', 'con', 'su', 'per', 'tra', 'fra']);
+    }
+
+    analyzeNote(note, skinCondition) {
+        // Pulisci e dividi il testo in parole
+        const words = note.toLowerCase()
+            .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '')
+            .split(/\s+/);
+
+        // Analizza ogni parola
+        words.forEach(word => {
+            if (word.length > 2 && !this.commonWords.has(word)) {
+                if (!this.keywords.has(word)) {
+                    this.keywords.set(word, {
+                        count: 0,
+                        totalSkinCondition: 0,
+                        occurrences: []
+                    });
+                }
+
+                const keywordData = this.keywords.get(word);
+                keywordData.count++;
+                keywordData.totalSkinCondition += skinCondition;
+                keywordData.occurrences.push({
+                    date: new Date(),
+                    skinCondition: skinCondition
+                });
+            }
+        });
+    }
+
+    getKeywordAnalysis() {
+        const analysis = [];
+        this.keywords.forEach((data, keyword) => {
+            const averageSkinCondition = data.totalSkinCondition / data.count;
+            analysis.push({
+                keyword: keyword,
+                count: data.count,
+                averageSkinCondition: averageSkinCondition,
+                correlation: this.calculateCorrelation(data.occurrences)
+            });
+        });
+
+        return analysis.sort((a, b) => b.count - a.count);
+    }
+
+    calculateCorrelation(occurrences) {
+        // Calcola la correlazione tra la presenza della parola e la condizione della pelle
+        if (occurrences.length < 3) return 0;
+
+        const averageCondition = occurrences.reduce((sum, occ) => sum + occ.skinCondition, 0) / occurrences.length;
+        return averageCondition > 50 ? 'negativa' : 'positiva';
+    }
+}
+
+// Modifica la classe SebdermAnalysis esistente aggiungendo:
+class SebdermAnalysis {
+    constructor() {
+        // ... codice esistente ...
+        this.textAnalysis = new TextAnalysis();
+    }
+
+    updateAnalysis() {
+        // ... codice esistente ...
+        this.updateTextAnalysis();
+    }
+
+    updateTextAnalysis() {
+        const data = this.getFilteredData();
+        const textAnalysisDiv = document.getElementById('textAnalysis');
+        
+        if (!textAnalysisDiv) return;
+
+        // Analizza le note
+        data.forEach(entry => {
+            if (entry.note && entry.note.trim() !== '') {
+                const avgSkinCondition = (
+                    parseInt(entry.pelle.zonaT) + 
+                    parseInt(entry.pelle.guance) + 
+                    parseInt(entry.pelle.cuoio)
+                ) / 3;
+                
+                this.textAnalysis.analyzeNote(entry.note, avgSkinCondition);
+            }
+        });
+
+        // Mostra i risultati
+        const keywordAnalysis = this.textAnalysis.getKeywordAnalysis();
+        
+        textAnalysisDiv.innerHTML = `
+            <h3>Analisi delle Note</h3>
+            <div class="keywords-container">
+                ${keywordAnalysis.slice(0, 10).map(k => `
+                    <div class="keyword-item ${k.correlation}">
+                        <span class="keyword">${k.keyword}</span>
+                        <span class="count">(${k.count} occorrenze)</span>
+                        <span class="correlation">Correlazione: ${k.correlation}</span>
+                    </div>
+                `).join('')}
+            </div>
+            <p class="analysis-note">* Le parole più frequenti nelle note e la loro correlazione con le condizioni della pelle</p>
+        `;
+    }
+}
 });
